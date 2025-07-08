@@ -1,164 +1,176 @@
 # 🌐 Universal NLP + Web Search + LLM Chatbot
 
-A **Streamlit**‑based chat application that combines lightweight NLP, real‑time internet search, and a local open‑source LLM to deliver up‑to‑date answers in a friendly chat UI.
+A modular Streamlit-based GenAI chatbot that blends lightweight NLP, real-time web search, and local LLaMA model inference to generate up-to-date, context-aware responses in a conversational UI.
 
 ---
 
 ## 🎯 Project Overview
 
-This repository implements a modular “GenAI Lab” toolkit featuring:
+This repository is a GenAI Lab sandbox, ideal for freelance demonstrations or AI prototyping. It integrates:
 
-1. **Natural Language Understanding**  
-   – Extracts keywords/entities from your question using **spaCy**.  
-2. **Real‑Time Web Search**  
-   – Queries Google via **SerpAPI** to fetch fresh snippets.  
-3. **Local LLM Inference**  
-   – Runs a quantized **LLaMA** model (`llama-cpp-python`) on‑device.  
-4. **Chat UI & Memory**  
-   – Persistent chat history with Streamlit’s built‑in `st.chat_message` & `st.chat_input`.  
-5. **Caching & Performance**  
-   – Caches search results and model outputs to minimize waiting.  
+- **Natural Language Understanding**: Entity & keyword extraction via spaCy.
+- **Real-Time Web Search**: Dynamic internet search using SerpAPI (Google).
+- **Local LLM Chat**: Quantized LLaMA-2 model running offline via `llama-cpp-python`.
+- **Interactive UI**: Built using Streamlit's native `st.chat_message` API.
+- **Session Memory & Caching**: Retains conversation context and caches responses.
 
-Use this as your **freelance GenAI playground**, demoing everything from AI chatbots to analytics dashboards and more.
+Use this project to explore AI chatbots, NLP pipelines, open-source LLM integration, or build client-ready GenAI demos.
 
 ---
 
 ## 🚀 Features
 
-- **Keyword / Intent Extraction**  
-- **Dynamic Google Search** (via SerpAPI)  
-- **Context Summarization** (simple truncation + optional pipeline)  
-- **Local LLaMA Chat** (no external LLM calls)  
-- **Conversation Memory** (in‑session)  
-- **Streamlit Chat UI** for interactive Q&A  
-- **Result & Model Caching** for instant repeat queries  
-- **Modular Structure**—easily swap in new data sources or LLMs  
+✅ Keyword & Intent Extraction (spaCy)  
+✅ Dynamic Google Search (via SerpAPI)  
+✅ Text Summarization of Web Contexts  
+✅ Local LLaMA Chat (no OpenAI or cloud calls)  
+✅ Session-Aware Chat Memory  
+✅ Interactive Streamlit Chat UI  
+✅ Fast Repeat Queries (using `st.cache_data`)  
+✅ Modular Python Architecture  
 
 ---
 
-## 📁 Repository Structure
+## 📁 Project Structure
 
+```
 genai_lab/
 ├── app.py                  # Main Streamlit app
 ├── requirements.txt        # Python dependencies
-├── serpapi.txt             # Your SerpAPI key (do NOT commit)
-├── .gitignore              # Git ignore rules
-├── README.md               # Project documentation
-├── llama_model/            # Pretrained LLaMA model files
+├── serpapi.txt             # SerpAPI key (excluded from Git)
+├── .gitignore              # Ignore secrets and model files
+├── README.md               # Documentation
+├── llama_model/            # Local quantized LLaMA model
 │   └── llama-2-7b.Q4_K_M.gguf
-├── modules/                # Python modules for NLP, search, LLM, etc.
-│   ├── nlp_utils.py        # Keyword extraction and NLP helpers
-│   ├── web_search.py       # Web search integration code
-│   ├── llm_utils.py        # LLM (Large Language Model) wrapper code
-│   ├── summarizer.py       # Text summarization functions
-│   ├── memory.py           # Conversation memory management
-│   ├── open_source_data.py # Utilities for open source data
-│   └── translator.py       # Translation helpers
-└── .github/                # GitHub Actions workflows for CI/CD
+├── modules/                # All backend components
+│   ├── nlp_utils.py        # spaCy keyword/entity extractor
+│   ├── web_search.py       # Google search via SerpAPI
+│   ├── summarizer.py       # Web result summarizer
+│   ├── llm_utils.py        # LLaMA-based chat wrapper
+│   ├── memory.py           # In-session memory functions
+│   ├── translator.py       # Translation helper (optional)
+│   └── open_source_data.py # Optional open datasets
+└── .github/
     └── workflows/
-        └── ci.yml          # CI pipeline definition
-
+        └── ci.yml          # GitHub Actions CI pipeline
+```
 
 ---
 
 ## 🛠️ Installation
 
-1. **Clone** this repo:
-   ```bash
-   git clone https://github.com/yourusername/genai_lab.git
-   cd genai_lab
-Create & activate a Python virtual environment:
+### 1. Clone the repo
+```bash
+git clone https://github.com/yadavvinay77/streamlit-genai-chatbot.git
+cd streamlit-genai-chatbot
+```
 
+### 2. Create & activate virtual environment
+
+#### Windows
+```bash
 python -m venv venv
-. venv/Scripts/activate    # Windows
-# source venv/bin/activate # macOS/Linux
-Install dependencies:
+venv\Scripts\activate
+```
 
+#### macOS/Linux
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### 3. Install dependencies
+```bash
 pip install -r requirements.txt
 python -m spacy download en_core_web_sm
-Add your SerpAPI key:
+```
 
+### 4. Add SerpAPI Key
+Save your key to a file:
+```bash
 echo "YOUR_SERPAPI_KEY" > serpapi.txt
-Download a quantized LLaMA model (Q4_K_M) to: llama_model/llama-2-7b.Q4_K_M.gguf
+```
+
+### 5. Add Quantized LLaMA Model
+Download `llama-2-7b.Q4_K_M.gguf` into:
+```
+llama_model/llama-2-7b.Q4_K_M.gguf
+```
 
 ---
-
 
 ## ▶️ Usage
 
+Start the app:
+```bash
 streamlit run app.py
-Open your browser at http://localhost:8501
+```
 
-Chat naturally: the bot will extract keywords, search online, and answer via LLaMA.
+Visit: [http://localhost:8501](http://localhost:8501)
+
+Type a natural question. The bot will:
+- Extract keywords
+- Search online
+- Summarize context
+- Answer with the LLaMA model
 
 ---
-
 
 ## ⚙️ Configuration
-Edit top of app.py to adjust:
 
-Number of web snippets (num_results)
+You can customize the following in `app.py`:
 
-LLaMA model path & max_tokens
-
-Cache TTLs in @st.cache_data decorators
+| Parameter         | Purpose                          |
+|------------------|----------------------------------|
+| `num_results`     | Number of web snippets to fetch |
+| `max_tokens`      | Max tokens in LLaMA response     |
+| `cache_ttl`       | Time-to-live for search cache    |
+| `llama_model_path`| Model file path on disk          |
 
 ---
-
 
 ## 🧪 CI/CD Pipeline
-We use GitHub Actions to:
 
--Run flake8 lint
+GitHub Actions runs automated checks on push/PR:
 
--Install dependencies & spaCy model
-
--Smoke‑test import of each module
-
--(Optional) Deploy to Streamlit Cloud
+✅ Python Linting with `flake8`  
+✅ Imports & syntax test for all modules  
+✅ Dependency setup and spaCy model download  
+🔄 Optional deployment to Streamlit Cloud  
 
 ---
 
+## 🚫 Security Best Practices
 
-## 🚫 Security & Best Practices
--Do not commit your serpapi.txt or any API keys.
-
--Add serpapi.txt and llama_model/ to .gitignore.
+- ✅ `serpapi.txt` and `llama_model/` are **excluded** via `.gitignore`
+- ❌ Never commit API keys to GitHub
+- 🔒 Use environment variables or secrets for cloud deployment
 
 ---
-
 
 ## 🤝 Contributing
--Fork the repo
 
--Create a feature branch (git checkout -b feature/foo)
-
--Commit your changes & push
-
--Open a Pull Request
+1. Fork this repo  
+2. Create a branch: `git checkout -b feature/your-feature`  
+3. Commit your changes  
+4. Push and open a pull request 🎉  
 
 ---
-
 
 ## 📄 License
--This project is licensed under the MIT License. See LICENSE for details.
+
+This project is licensed under the [MIT License](LICENSE).  
+Use, modify, and share freely with attribution.
 
 ---
 
+## 🌍 How to Enable CI/CD
 
-### How to Enable CI/CD
-
-1. Push this repo to GitHub in a public or private repo.  
-2. Enable **Actions** tab—you’ll see the “CI” workflow run on each push/PR.  
-3. (Optional) Link your Streamlit Cloud account in the `deploy` step.
+1. Push your code to GitHub (public or private)
+2. Go to the **Actions** tab and enable workflows
+3. CI will now trigger on each `git push` or PR
+4. (Optional) Connect to [Streamlit Cloud](https://streamlit.io/cloud) for free hosting
 
 ---
 
-That should give you a **self‑documented repo** with **automated testing** and optional **deployment**. Let me know if you’d like to customize further!
-
-
-
-
-
-
-
+**Need Help?** Raise an issue or start a discussion in the repo.
