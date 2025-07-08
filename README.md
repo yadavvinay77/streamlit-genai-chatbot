@@ -39,24 +39,25 @@ Use this as your **freelance GenAI playground**, demoing everything from AI chat
 ## 📁 Repository Structure
 
 genai_lab/
-├── app.py
-├── requirements.txt
-├── serpapi.txt # Your SerpAPI key (do NOT commit)
-├── .gitignore
-├── README.md
-├── llama_model/
-│ └── llama-2-7b.Q4_K_M.gguf
-├── modules/
-│ ├── nlp_utils.py
-│ ├── web_search.py
-│ ├── llm_utils.py
-│ |── summarizer.py
-│ ├── memory.py
-│ |── open_source_data.py
-│ └── translator.py
-└── .github/
-└── workflows/
-└── ci.yml
+├── app.py                  # Main Streamlit app
+├── requirements.txt        # Python dependencies
+├── serpapi.txt             # Your SerpAPI key (do NOT commit)
+├── .gitignore              # Git ignore rules
+├── README.md               # Project documentation
+├── llama_model/            # Pretrained LLaMA model files
+│   └── llama-2-7b.Q4_K_M.gguf
+├── modules/                # Python modules for NLP, search, LLM, etc.
+│   ├── nlp_utils.py        # Keyword extraction and NLP helpers
+│   ├── web_search.py       # Web search integration code
+│   ├── llm_utils.py        # LLM (Large Language Model) wrapper code
+│   ├── summarizer.py       # Text summarization functions
+│   ├── memory.py           # Conversation memory management
+│   ├── open_source_data.py # Utilities for open source data
+│   └── translator.py       # Translation helpers
+└── .github/                # GitHub Actions workflows for CI/CD
+    └── workflows/
+        └── ci.yml          # CI pipeline definition
+
 
 ---
 
