@@ -1,0 +1,8 @@
+key.txt
+serpapi.txt
+llama_model/
+__pycache__/
+*.pyc
+env/
+venv/
+.vscode/
